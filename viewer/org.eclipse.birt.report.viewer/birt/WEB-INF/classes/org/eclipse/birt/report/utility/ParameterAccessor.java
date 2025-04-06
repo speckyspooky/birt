@@ -936,8 +936,17 @@ public class ParameterAccessor {
 		if (locale == null || locale.length() <= 0) {
 			return null;
 		}
-		// remove all '<' character to avoid xss attack
-		locale = locale.replace('<', ' ');
+
+		// Use icu4j to normalize the locale string
+		ULocale ulocale = new ULocale(locale);
+
+		// In case locale string has garbage characters from xss attack
+		// We ignore the locale if it is not one of the recognized available locales
+		ULocale[] availableLocales = ULocale.getAvailableLocales();
+		List<ULocale> list = Arrays.asList(availableLocales);
+		if (!list.contains(ulocale)) {
+			return null;
+		}
 		return new ULocale(locale).toLocale();
 	}
 
