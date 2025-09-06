@@ -38,6 +38,12 @@ public class HTMLEmitterOptimizeTest extends HTMLReportEmitterTestCase {
 		return "./htmlEmitterOptimizeTest";
 	}
 
+	/**
+	 * Test performance optimized HTML creation
+	 *
+	 * @throws EngineException
+	 * @throws IOException
+	 */
 	public void testPerformanceOptimize() throws EngineException, IOException {
 		HTMLRenderOption options = new HTMLRenderOption();
 		options.setEnableAgentStyleEngine(true);
